@@ -81,6 +81,11 @@ module Refinery
                     image_page.caption = image_data['caption']
                   end
                   
+                  # Add link if supported
+                  if RefinerySetting.find_or_set(:page_images_links, false)
+                    image_page.link = image_data['link']
+                  end
+                  
                   self.image_pages << image_page if image_data['image_page_id'].blank?
                   image_page.save
                 end
@@ -102,6 +107,10 @@ module Refinery
         
         def image_page_id_for_image_index(index)
           self.image_pages[index].try(:id)
+        end
+
+        def link_for_image_index(index)
+          self.image_pages[index].try(:link).presence || ""
         end
       end
     end

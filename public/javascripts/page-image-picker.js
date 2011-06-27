@@ -88,12 +88,13 @@ image_added = function(image) {
   new_list_item = (current_list_item = $('li.empty')).clone();
   image_id = $(image).attr('id').replace('image_', '');
   current_list_item.find('input:hidden:first').val(image_id);
+  current_list_item.find('.image_link_wrapper').show();
 
   $("<img />").attr({
     title: $(image).attr('title')
     , alt: $(image).attr('alt')
     , src: $(image).attr('data-grid') // use 'grid' size that is built into Refinery CMS (135x135#c).
-  }).appendTo(current_list_item);
+  }).prependTo(current_list_item);
 
   current_list_item.attr('id', 'image_' + image_id).removeClass('empty');
 

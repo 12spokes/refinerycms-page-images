@@ -15,6 +15,15 @@
                               :class => 'page_caption' %>
           </div>
         <% end %>
+
+        <% if RefinerySetting.find_or_set(:page_images_links, false) %>
+          <div class='image_link_wrapper'>
+            <%= label_tag "#{f.object_name}[images_attributes][#{index}][link]", 'Link' %>
+            <%= text_field_tag "#{f.object_name}[images_attributes][#{index}][link]", 
+                                f.object.link_for_image_index(index),
+                                :class => 'image_link' %>
+          </div>
+        <% end %>
       </li>
     <% end %>
     <li class='empty'>
@@ -26,6 +35,15 @@
                             :style => 'display: none',
                             :id => "page_captions_#{f.object.images.size}",
                             :class => 'page_caption' %>
+        </div>
+      <% end %>
+
+      <% if RefinerySetting.find_or_set(:page_images_links, false) %>
+        <div class='image_link_wrapper' style='display:none;'>
+          <%= label_tag "#{f.object_name}[images_attributes][#{f.object.images.size}][link]", 'Link' %>
+          <%= text_field_tag "#{f.object_name}[images_attributes][#{f.object.images.size}][link]",
+                                '',
+                                :class => 'image_link' %>
         </div>
       <% end %>
     </li>
